@@ -9,7 +9,7 @@ platform :ios, podfile_properties['ios.deploymentTarget'] || '13.0'
 install! 'cocoapods',
   :deterministic_uuids => false
 
-target 'VedicGames' do
+target 'GitaGame' do
   use_expo_modules!
   config = use_native_modules!
 
@@ -52,6 +52,11 @@ target 'VedicGames' do
   end
 
   post_integrate do |installer|
+    begin
+      expo_patch_react_imports!(installer)
+    rescue => e
+      Pod::UI.warn e
+    end
     begin
       expo_patch_react_imports!(installer)
     rescue => e

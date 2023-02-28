@@ -1,21 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow strict-local
+ * @author Vadim Savin
+ */
 
-export default function App() {
+import React, { useEffect } from 'react';
+import { StatusBar } from 'react-native';
+import 'react-native-gesture-handler';
+import Purchases from 'react-native-purchases';
+import Router from './src/navigation/Router';
+import { API_KEY } from './src/constants';
+import SplashScreen from "react-native-splash-screen"; 
+const App: () => React$Node = () => {
+  useEffect(() => {
+    SplashScreen.hide(); //hides the splash screen on app load.
+  }, []);
+  useEffect(() => {
+    /* Enable debug logs before calling `setup`. */
+    Purchases.setDebugLogsEnabled(true);
+
+    /*
+      Initialize the RevenueCat Purchases SDK.
+
+      - appUserID is nil, so an anonymous ID will be generated automatically by the Purchases SDK. Read more about Identifying Users here: https://docs.revenuecat.com/docs/user-ids
+
+      - observerMode is false, so Purchases will automatically handle finishing transactions. Read more about Observer Mode here: https://docs.revenuecat.com/docs/observer-mode
+
+      - useAmazon is false, so it will use the Play Store in Android and App Store in iOS by default.
+      */
+    Purchases.configure({ apiKey: API_KEY, appUserID: null, observerMode: false, useAmazon: false });
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar barStyle="light-content" />
+      <Router />
+      
+    </>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

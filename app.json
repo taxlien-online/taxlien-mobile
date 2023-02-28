@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "VedicGames",
-    "slug": "VedicGames",
+    "name": "Gita Game",
+    "slug": "Gita Game",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ]
   },
-  "name": "VedicGames"
+  "name": "Gita Game"
 }
