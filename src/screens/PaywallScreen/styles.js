@@ -11,6 +11,22 @@ const styles = StyleSheet.create({
   headerFooterContainer: {
     marginVertical: 10,
   },
+  privacy:{
+    marginTop: 20,
+    color: 'lightgrey',
+    textDecorationLine: 'underline',
+    textDecorationColor: '#FF8F3B',
+    textDecorationStyle: 'dashed',
+    fontSize: 12
+  },
+  terms:{
+    marginTop: 5,
+    color: 'lightgrey',
+    textDecorationLine: 'underline',
+    textDecorationColor: '#FF8F3B',
+    textDecorationStyle: 'dashed',
+    fontSize: 12
+  },
   overlay: {
     flex: 1,
     position: 'absolute',

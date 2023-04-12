@@ -14,11 +14,34 @@ import Purchases from 'react-native-purchases';
 import Router from './src/navigation/Router';
 import { API_KEY } from './src/constants';
 import SplashScreen from "react-native-splash-screen"; 
+import SpInAppUpdates, {
+  NeedsUpdateResponse,
+  IAUUpdateKind,
+  StartUpdateOptions,
+} from 'sp-react-native-in-app-updates';
+
 const App: () => React$Node = () => {
   useEffect(() => {
     SplashScreen.hide(); //hides the splash screen on app load.
   }, []);
   useEffect(() => {
+
+    const inAppUpdates = new SpInAppUpdates(
+      false // isDebug
+    );
+    // curVersion is optional if you don't provide it will automatically take from the app using react-native-device-info
+    inAppUpdates.checkNeedsUpdate({ curVersion: '0.0.8' }).then((result) => {
+      if (result.shouldUpdate) {
+        let updateOptions: StartUpdateOptions = {};
+        if (Platform.OS === 'android') {
+          // android only, on iOS the user will be promped to go to your app store page
+          updateOptions = {
+            updateType: IAUUpdateKind.FLEXIBLE,
+          };
+        }
+        inAppUpdates.startUpdate(updateOptions); // https://github.com/SudoPlz/sp-react-native-in-app-updates/blob/master/src/types.ts#L78
+      }
+    });
     /* Enable debug logs before calling `setup`. */
     Purchases.setDebugLogsEnabled(true);
 

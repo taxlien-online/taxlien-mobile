@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Alert } from 'react-native';
 import Purchases from 'react-native-purchases';
 import { PackageItem } from '../../components';
+import {TouchableOpacity, Linking} from 'react-native';
 import styles from './styles.js';
 
 /*
@@ -37,8 +38,10 @@ const PaywallScreen = () => {
 
   const header = () => <Text style={styles.text}>Gita Game</Text>;
 
+  const PrivacyClick = () => {
+    Linking.openURL('https://www.privacypolicies.com/live/064296a8-e682-4587-807e-845b695f0af1');
+  };
   const footer = () => {
-    
     return (
       <Text style={styles.text}>
         В нашем приложении присутствует Месячная автоматически возобновляемая подписка на контент предоставляемый в приложении (полный доступ):
@@ -49,7 +52,9 @@ const PaywallScreen = () => {
 
 • Текущая подписка не может быть отменена в течение активного периода подписки; однако вы можете управлять своей подпиской и / или отключить автоматическое продление, посетив настройки своей учетной записи iTunes после покупки.
 
-• Политика конфиденциальности: https://www.privacypolicies.com/live/064296a8-e682-4587-807e-845b695f0af1
+<TouchableOpacity onPress={PrivacyClick} >
+      <Text  style={styles.privacy}>• Privacy Policy: https://www.privacypolicies.com/live/064296a8-e682-4587-807e-845b695f0af1</Text>
+</TouchableOpacity>
       </Text>
     );
   };
